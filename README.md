@@ -7,7 +7,7 @@
 <style>
   body {
     font-family: 'Segoe UI', sans-serif;
-    background: #ffe6f0;
+    background: #ffc0cb; /* Soft pink background */
     display: flex;
     flex-direction: column;
     align-items: center;
