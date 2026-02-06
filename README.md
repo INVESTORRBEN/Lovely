@@ -43,18 +43,24 @@
   button:hover {
     background: #ff3399;
   }
+
+  button:disabled {
+    background: #ffb3d9;
+    cursor: not-allowed;
+  }
 </style>
 </head>
 <body>
 
 <div class="note" id="note">
-1. Hey my love 💕, my heart’s been holding a tiny secret for you.
+1. Hey my love 💕, my heart's been holding a tiny secret for you.
 </div>
 <button id="nextBtn">Next</button>
 
 <script>
   const messages = [
-    "2. I’ve been dreaming of telling you this, just quietly, just us 🥰.",
+    "1. Hey my love 💕, my heart's been holding a tiny secret for you.",
+    "2. I've been dreaming of telling you this, just quietly, just us 🥰.",
     "3. This month made me fall for you even more 💖.",
     "4. How about one special day, just hugs, smiles, and us? 🌸",
     "5. Will you be my Valentine? 🐻💌"
@@ -66,13 +72,13 @@
   const button = document.getElementById('nextBtn');
 
   button.addEventListener('click', () => {
-    if(currentIndex < messages.length){
+    if(currentIndex < messages.length - 1){
+      currentIndex++;
       // Fade out
       noteDiv.style.opacity = 0;
       setTimeout(() => {
         noteDiv.textContent = messages[currentIndex];
         noteDiv.style.opacity = 1; // Fade in
-        currentIndex++;
       }, 700); // Matches CSS transition
     } else {
       button.disabled = true;
