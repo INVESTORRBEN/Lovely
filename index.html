@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love Note</title>
+<title>Lovely Note</title>
 <style>
   body {
     font-family: 'Segoe UI', sans-serif;
@@ -12,24 +12,40 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
   }
 
-  .note {
-    background: #fff0f5;
-    padding: 25px 35px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  .container {
+    border: 5px solid #ff66b3; /* Pink outer frame for note */
+    border-radius: 20px;
+    padding: 20px;
+    background: #ffe6f0;
     text-align: center;
-    font-size: 1.3em;
-    max-width: 400px;
+    max-width: 450px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+
+  .note {
+    background: #fff; /* White inner frame */
+    padding: 20px 25px;
+    border-radius: 15px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
     opacity: 1;
     transition: opacity 0.7s ease;
   }
 
+  .media {
+    border: 5px solid white; /* White frame for media */
+    border-radius: 15px;
+    max-width: 100%;
+    margin-bottom: 15px;
+    transition: opacity 0.7s ease;
+    opacity: 1;
+  }
+
   button {
-    margin-top: 25px;
     padding: 12px 25px;
     border: none;
     background: #ff66b3;
@@ -52,10 +68,13 @@
 </head>
 <body>
 
-<div class="note" id="note">
-1. Hey my love 💕, my heart's been holding a tiny secret for you.
+<div class="container">
+  <div class="note" id="note">
+    1. Hey my love 💕, my heart's been holding a tiny secret for you.
+  </div>
+  <img class="media" id="media" src="https://raw.githubusercontent.com/INVESTORRBEN/Lovely/refs/heads/main/IMG_3451.gif" alt="Love Gif">
+  <button id="nextBtn">Next</button>
 </div>
-<button id="nextBtn">Next</button>
 
 <script>
   const messages = [
@@ -66,20 +85,34 @@
     "5. Will you be my Valentine? 🐻💌"
   ];
 
-  let currentIndex = 0;
+  const mediaUrls = [
+    "https://raw.githubusercontent.com/INVESTORRBEN/Lovely/refs/heads/main/IMG_3451.gif",
+    "https://raw.githubusercontent.com/INVESTORRBEN/Lovely/refs/heads/main/IMG_3447.gif",
+    "https://raw.githubusercontent.com/INVESTORRBEN/Lovely/refs/heads/main/IMG_3450.gif",
+    "https://raw.githubusercontent.com/INVESTORRBEN/Lovely/refs/heads/main/IMG_3446.gif",
+    "https://raw.githubusercontent.com/INVESTORRBEN/Lovely/refs/heads/main/IMG_3453.gif"
+  ];
 
+  let currentIndex = 0;
   const noteDiv = document.getElementById('note');
+  const mediaImg = document.getElementById('media');
   const button = document.getElementById('nextBtn');
 
   button.addEventListener('click', () => {
     if(currentIndex < messages.length - 1){
       currentIndex++;
+
       // Fade out
       noteDiv.style.opacity = 0;
+      mediaImg.style.opacity = 0;
+
       setTimeout(() => {
         noteDiv.textContent = messages[currentIndex];
-        noteDiv.style.opacity = 1; // Fade in
-      }, 700); // Matches CSS transition
+        mediaImg.src = mediaUrls[currentIndex];
+        // Fade in
+        noteDiv.style.opacity = 1;
+        mediaImg.style.opacity = 1;
+      }, 700);
     } else {
       button.disabled = true;
       button.textContent = "💖 All done! 💖";
